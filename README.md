@@ -1,6 +1,6 @@
 # Prompter (WIP)
 
-Simple, easy-to-use framework for CLI-looping applications.
+Simple, easy-to-use framework for looping CLI applications.
 
 ### Installation
 
