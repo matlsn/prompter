@@ -19,3 +19,9 @@ Edit **`./.env`** with your preferred settings.
 ### Utilities (for usage in `execute () {}` inside plugins)
 
 **`this.log('content', 'color')`** - Logs content to console with optional color (provided by [Chalk](https://www.npmjs.com/package/chalk)). Compatable with arrays for cleaner multi-logging.
+
+<p align="center">
+  <a href="https://github.com/standard/standard">
+    <img alt="JavaScript Style Guide" src="https://cdn.rawgit.com/standard/standard/master/badge.svg" />
+  </a>
+</p>
