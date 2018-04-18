@@ -12,4 +12,4 @@ Take a look at **`./commands/plugins/ping.js`** for a sample plugin.
 
 ### Utilities (for usage in `execute () {}` inside plugins)
 
-**`this.log('content', 'color')`** - Logs content to console with optional color (provided by [Chalk](https://www.npmjs.com/package/chalk))
+**`this.log('content', 'color')`** - Logs content to console with optional color (provided by [Chalk](https://www.npmjs.com/package/chalk)). Compatable with arrays for cleaner multi-logging.
