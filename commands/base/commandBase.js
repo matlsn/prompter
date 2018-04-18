@@ -18,7 +18,8 @@ class commandBase {
   }
 
   log (content, color = 'white') {
-    console.log(c[color](content))
+    if (content.constructor === Array) content.forEach((i) => { console.log(c[color](i)) })
+    else console.log(c[color](content))
   }
 }
 

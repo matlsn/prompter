@@ -13,39 +13,54 @@ const main = {
 const commandFiles = fs.readdirSync('./commands/plugins')
 for (const file of commandFiles) {
   const command = require(`./commands/plugins/${file}`)
-  main.sCmd(command.name, command)
+  main.aCmd[command.name] = command
 }
 
 async function getInput () {
-  const response = await prompts({
+  const message = await prompts({
     type: 'text',
     name: 'input',
     message: '',
     initial: 'help'
   })
-  if (!response.input) console.log(c.red("Type 'exit' to quit!"))
+  if (!message.input) console.log(c.red("Type 'exit' to quit!"))
   else {
-    if (response.input === 'exit') {
+    message.input = message.input.split(' ')
+    if (message.input[0] === 'exit') {
+      // Exit command
       console.log(c.red(process.env.EXITMSG || 'Exiting...'))
       process.exit(0)
-    } else if (response.input === 'help') {
-      let message = `${c.underline.bold.cyan('Help Menu')}\n`
+    } else if (message.input[0] === 'help') {
+      // Help command
+      let helpMessage = `${c.underline.bold.cyan('Help Menu')}\n`
       for (let item in main.aCmd) {
         const cmd = new main.aCmd[item]()
-        message += `\n${c.red(cmd.name)} - ${cmd.description}`
+        helpMessage += `\n${c.red(`${cmd.name}${cmd.usage ? ' ' + cmd.usage : ''}`)} - ${cmd.description}`
       }
-      console.log(message)
+      console.log(`${helpMessage}\n${c.red(`exit`)} - Exits the CLI.\n${c.red(`help`)} - Shows this menu.`)
     } else {
+      // Plugins
       try {
-        const command = response.input.toLowerCase()
+        const command = message.input[0].toLowerCase()
+        let index = 0
         for (let item in main.aCmd) {
+          index++
           const cmd = new main.aCmd[item]()
-          if (!(command === cmd.name) && !(cmd.aliases.indexOf(command) >= 0) && main.aCmd.indexOf(item) === Object(main.aCmd).keys.length - 1) throw new Error()
-          else {
+          if (!(command === cmd.name) && !(cmd.aliases.indexOf(command) >= 0)) {
+            if (index === Object.keys(main.aCmd).length) throw new Error()
+            continue
+          } else {
             try {
-              cmd.execute()
+              let args = null
+              if (message.input.length > 1) {
+                args = message.input.slice(0)
+                args.shift()
+              }
+              cmd.execute(message.input.length > 1 ? message.input.slice(0).join(' ') : message.input[0], args)
+              break
             } catch (err) {
               console.log(c.red('There was an error!\n\n') + c.cyan(err))
+              break
             }
           }
         }
