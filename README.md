@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://i.imgur.com/mW6kpyK.png" />
+</p>
+
 # Prompter (WIP)
 
 Simple, easy-to-use framework for looping CLI applications.
