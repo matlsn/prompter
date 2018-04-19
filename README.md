@@ -43,9 +43,7 @@ module.exports = Ping
 
 ### 🗒️ Utilities (for usage in `execute () {}` inside plugins)
 
-**`this.log('content', 'color')`** - Logs content to console with optional color (provided by [Chalk](https://www.npmjs.com/package/chalk)).
-
-Compatable with arrays for cleaner multi-logging.
+- **`this.log('content', 'color')`** - Logs content to console with optional color (provided by [Chalk](https://www.npmjs.com/package/chalk)). Compatable with arrays for cleaner multi-logging.
 
 ## :dizzy: Where is this framework used?
 
