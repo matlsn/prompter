@@ -14,7 +14,7 @@ class Ping extends commandBase {
   }
 
   execute () {
-    this.log('Pong!', 'red')
+    this.log('Pong!', 'cyan')
   }
 }
 

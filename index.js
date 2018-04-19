@@ -23,21 +23,21 @@ async function getInput () {
     message: '',
     initial: 'help'
   })
-  if (!message.input) console.log(c.red("Type 'exit' to quit!"))
+  if (!message.input) console.log(c.blue("Type 'exit' to quit!"))
   else {
     message.input = message.input.split(' ')
     if (message.input[0] === 'exit') {
       // Exit command
-      console.log(c.red(process.env.EXITMSG || 'Exiting...'))
+      console.log(c[process.env.DEFAULT_LOG_COLOR || 'white'](process.env.EXIT_MSG || 'Exiting...'))
       process.exit(0)
     } else if (message.input[0] === 'help') {
       // Help command
       let helpMessage = `${c.underline.bold.cyan('Help Menu')}\n`
       for (let item in main.aCmd) {
         const cmd = new main.aCmd[item]()
-        helpMessage += `\n${c.red(`${cmd.name}${cmd.usage ? ' ' + cmd.usage : ''}`)} - ${cmd.description}`
+        helpMessage += `\n${c.bgBlue(` ${cmd.name}${cmd.usage ? ' ' + cmd.usage : ''} `)} - ${cmd.description}`
       }
-      console.log(`${helpMessage}\n${c.red(`exit`)} - Exits the CLI.\n${c.red(`help`)} - Shows this menu.`)
+      console.log(`${helpMessage}\n${c.bgBlue(` exit `)} - Exits the application.\n${c.bgBlue(` help `)} - Shows this menu.`)
     } else {
       // Plugins
       try {
@@ -59,13 +59,13 @@ async function getInput () {
               cmd.execute(message.input.length > 1 ? message.input.slice(0).join(' ') : message.input[0], args)
               break
             } catch (err) {
-              console.log(c.red('There was an error!\n\n') + c.cyan(err))
+              console.log(c[process.env.DEFAULT_LOG_COLOR || 'white']('There was an error!\n\n') + err)
               break
             }
           }
         }
       } catch (err) {
-        console.log(c.red('Invalid command!'))
+        console.log(c[process.env.DEFAULT_LOG_COLOR || 'white']('Invalid command!'))
       }
     }
   }

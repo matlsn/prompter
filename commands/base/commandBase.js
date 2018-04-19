@@ -14,10 +14,10 @@ class commandBase {
   }
 
   execute () {
-    console.log('Default command execute!')
+    throw new Error('Execute must not be blank!')
   }
 
-  log (content, color = 'white') {
+  log (content, color = process.env.DEFAULT_LOG_COLOR || 'white') {
     if (content.constructor === Array) content.forEach((i) => { console.log(c[color](i)) })
     else console.log(c[color](content))
   }
