@@ -13,6 +13,12 @@ npm i
 node index
 ```
 
+
+<p align="center">
+  <img alt="Usage Screenshot" src="https://i.imgur.com/EzBl7eU.png" />
+</p>
+
+
 ## :clipboard: Plugin Example
 
 ```js
