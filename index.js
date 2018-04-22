@@ -16,6 +16,12 @@ for (const file of commandFiles) {
   main.aCmd[command.name] = command
 }
 
+function defGet (env, alt) {
+  return process.env[env] || alt
+}
+
+const defClr = process.env.DEFAULT_LOG_COLOR || 'white'
+
 async function getInput () {
   const message = await prompts({
     type: 'text',
@@ -28,16 +34,16 @@ async function getInput () {
     message.input = message.input.split(' ')
     if (message.input[0] === 'exit') {
       // Exit command
-      console.log(c[process.env.DEFAULT_LOG_COLOR || 'white'](process.env.EXIT_MSG || 'Exiting...'))
+      console.log(c[defClr](defGet('EXIT_MSG', 'Exiting...')))
       process.exit(0)
     } else if (message.input[0] === 'help') {
       // Help command
-      let helpMessage = `${c.underline.bold.cyan('Help Menu')}\n`
+      let helpMessage = `${c.underline.bold.cyan(defGet('HELP_MENU_TITLE', 'Help Menu'))}\n`
       for (let item in main.aCmd) {
         const cmd = new main.aCmd[item]()
         helpMessage += `\n${c.bgBlue(` ${cmd.name}${cmd.usage ? ' ' + cmd.usage : ''} `)} - ${cmd.description}`
       }
-      console.log(`${helpMessage}\n${c.bgBlue(` exit `)} - Exits the application.\n${c.bgBlue(` help `)} - Shows this menu.`)
+      console.log(`${helpMessage}\n${c.bgBlue(` exit `)} - ${defGet('EXIT_DESCRIPTION', 'Exits the application.')}\n${c.bgBlue(` help `)} - ${defGet('Help_DESCRIPTION', 'Shows this menu.')}`)
     } else {
       // Plugins
       try {
@@ -65,7 +71,7 @@ async function getInput () {
           }
         }
       } catch (err) {
-        console.log(c[process.env.DEFAULT_LOG_COLOR || 'white']('Invalid command!'))
+        console.log(c[defClr](defGet('INVALID_COMMAND', 'Invalid command!')))
       }
     }
   }
