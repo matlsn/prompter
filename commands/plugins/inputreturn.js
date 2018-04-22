@@ -19,7 +19,7 @@ class InputReturn extends commandBase {
 
   execute (msg, args) {
     const messageArray = [`Full message: ${msg}`, `Arguments: ${args ? args.join(' ') : 'none'}`]
-    this.log(messageArray, 'blue')
+    this.log(messageArray, 'random')
   }
 }
 
