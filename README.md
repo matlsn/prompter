@@ -13,6 +13,7 @@ npm i
 node index
 ```
 
+Edit .env file using .env.example as a guideline for tweaks and settings.
 
 <p align="center">
   <img alt="Usage Screenshot" src="https://i.imgur.com/EzBl7eU.png" />
