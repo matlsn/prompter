@@ -51,6 +51,9 @@ module.exports = Ping
 ### 🗒️ Utilities (for usage in `execute () {}` inside plugins)
 
 - **`this.log('content', 'color')`** - Logs content to console with optional color (provided by [Chalk](https://www.npmjs.com/package/chalk)). Compatable with arrays for cleaner multi-logging.
+- **`this.randInt(min, max)`** - Returns a random number between `min` and `max`.
+- **`this.randSelect([array])`** - Returns a random item from an array.
+- **`this.randHex()`** - Returns a random hex color. Compatable with `this.log` color input.
 
 ## :dizzy: Where is this framework used?
 
